@@ -1,0 +1,16 @@
+services: # cada "service" é um container
+  db: # nome do serviço — escolhido por você
+    image: mysql:latest # imagem que será baixada do Docker Hub
+    restart: always # sobe sozinho se cair ou se você reiniciar o PC
+
+    environment: # variáveis lidas pelo MySQL na primeira inicialização
+      MYSQL_USER: "admin" # cria um usuário comum
+      MYSQL_PASSWORD: "admin123" # senha desse usuário
+      MYSQL_DATABASE: "diet_api" # cria este banco automaticamente
+      MYSQL_ROOT_PASSWORD: "admin123" # senha do root (obrigatória)
+
+    ports:
+      - "3306:3306" # PORTA_DA_SUA_MÁQUINA : PORTA_DENTRO_DO_CONTAINER
+
+    volumes:
+      - /home/julio/Documentos/mysql:/var/lib/mysql # onde os dados ficam gravados
