@@ -1,7 +1,7 @@
 services: # cada "service" é um container
   db: # nome do serviço — escolhido por você
-    image: mysql:latest # imagem que será baixada do Docker Hub
-    restart: always # sobe sozinho se cair ou se você reiniciar o PC
+    image: mysql:8.0 # versão fixa: "latest" pode mudar e quebrar o projeto
+    restart: unless-stopped # religa sozinho, mas respeita quando você para de propósito
 
     environment: # variáveis lidas pelo MySQL na primeira inicialização
       MYSQL_USER: "admin" # cria um usuário comum
@@ -13,4 +13,7 @@ services: # cada "service" é um container
       - "3306:3306" # PORTA_DA_SUA_MÁQUINA : PORTA_DENTRO_DO_CONTAINER
 
     volumes:
-      - /home/julio/Documentos/mysql:/var/lib/mysql # onde os dados ficam gravados
+      - diet_data:/var/lib/mysql # volume nomeado, gerenciado pelo Docker
+
+volumes: # declaração obrigatória do volume nomeado — na margem esquerda
+  diet_data:
